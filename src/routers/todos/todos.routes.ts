@@ -1,11 +1,11 @@
 import { createRoute, z } from "@hono/zod-openapi";
-import { insertTodoSchema, selectTodoSchema, updateTodoSchema } from "@/db/schema/todo";
 import * as HTTP_STATUS_CODES from "@/helpers/http-status-codes";
 import jsonContent from "@/openapi/helpers/json-content";
 import jsonContentOneOf from "@/openapi/helpers/json-content-one-of";
 import createErrorSchema from "@/openapi/schema/create-error-schema";
 import IdUUIDv7ParamsSchema from "@/openapi/schema/id-uuidv7-params";
 import notFoundSchema from "@/openapi/schema/not-found-schema";
+import { insertTodoSchema, selectTodoSchema, updateTodoSchema } from "./todos.schema";
 
 const tags = ["Todos"];
 
