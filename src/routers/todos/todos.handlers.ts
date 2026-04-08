@@ -12,19 +12,22 @@ import type {
 import * as todosService from "./todos.service";
 
 export const getAll: AppRouteHandler<GetAllRoute> = async (c) => {
-  const todos = await todosService.getAllTodos();
+  const user = c.get("user");
+  const todos = await todosService.getAllTodosByUserId(user!.id);
   return respondJson<GetAllRoute>(c, HTTP_STATUS_CODES.OK, todos);
 };
 
 export const create: AppRouteHandler<CreateRoute> = async (c) => {
+  const user = c.get("user");
   const todo = c.req.valid("json");
-  const insertedTodo = await todosService.createTodo(todo);
+  const insertedTodo = await todosService.createTodo(todo, user!.id);
   return respondJson<CreateRoute>(c, HTTP_STATUS_CODES.CREATED, insertedTodo);
 };
 
 export const getOne: AppRouteHandler<GetOneRoute> = async (c) => {
   const params = c.req.valid("param");
-  const todo = await todosService.getTodoById(params.id);
+  const user = c.get("user");
+  const todo = await todosService.getTodoByIdAndUserId(params.id, user!.id);
   if (!todo) {
     return respondJson<GetOneRoute>(c, HTTP_STATUS_CODES.NOT_FOUND, {
       message: HTTP_STATUS_PHRASES.NOT_FOUND,
@@ -36,7 +39,8 @@ export const getOne: AppRouteHandler<GetOneRoute> = async (c) => {
 export const update: AppRouteHandler<UpdateRoute> = async (c) => {
   const params = c.req.valid("param");
   const body = c.req.valid("json");
-  const updatedTodo = await todosService.updateTodo(params.id, body);
+  const user = c.get("user");
+  const updatedTodo = await todosService.updateTodo(params.id, body, user!.id);
   if (!updatedTodo) {
     return respondJson<UpdateRoute>(c, HTTP_STATUS_CODES.NOT_FOUND, {
       message: HTTP_STATUS_PHRASES.NOT_FOUND,
@@ -47,7 +51,8 @@ export const update: AppRouteHandler<UpdateRoute> = async (c) => {
 
 export const deleteOne: AppRouteHandler<DeleteOneRoute> = async (c) => {
   const params = c.req.valid("param");
-  const result = await todosService.deleteTodo(params.id);
+  const user = c.get("user");
+  const result = await todosService.deleteTodo(params.id, user!.id);
   if (result.rowCount === 0) {
     return respondJson<DeleteOneRoute>(c, HTTP_STATUS_CODES.NOT_FOUND, {
       message: HTTP_STATUS_PHRASES.NOT_FOUND,

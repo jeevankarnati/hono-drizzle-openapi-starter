@@ -1,5 +1,6 @@
-import { createRoute, z } from "@hono/zod-openapi";
+import { z } from "@hono/zod-openapi";
 import * as HTTP_STATUS_CODES from "@/helpers/http-status-codes";
+import { createProtectedRoute } from "@/openapi/create-protected-route";
 import jsonContent from "@/openapi/helpers/json-content";
 import jsonContentOneOf from "@/openapi/helpers/json-content-one-of";
 import createErrorSchema from "@/openapi/schema/create-error-schema";
@@ -9,7 +10,7 @@ import { insertTodoSchema, selectTodoSchema, updateTodoSchema } from "./todos.sc
 
 const tags = ["Todos"];
 
-export const getAll = createRoute({
+export const getAll = createProtectedRoute({
   tags,
   method: "get",
   path: "/todos",
@@ -21,7 +22,7 @@ export const getAll = createRoute({
   },
 });
 
-export const create = createRoute({
+export const create = createProtectedRoute({
   tags,
   method: "post",
   path: "/todos",
@@ -44,7 +45,7 @@ export const create = createRoute({
   },
 });
 
-export const getOne = createRoute({
+export const getOne = createProtectedRoute({
   tags,
   method: "get",
   path: "/todos/{id}",
@@ -67,7 +68,7 @@ export const getOne = createRoute({
   },
 });
 
-export const update = createRoute({
+export const update = createProtectedRoute({
   tags,
   method: "patch",
   path: "/todos/{id}",
@@ -95,7 +96,7 @@ export const update = createRoute({
   },
 });
 
-export const deleteOne = createRoute({
+export const deleteOne = createProtectedRoute({
   tags,
   method: "delete",
   path: "/todos/{id}",

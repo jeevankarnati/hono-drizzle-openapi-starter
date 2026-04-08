@@ -9,6 +9,7 @@ export const insertTodoSchema = createInsertSchema(todosTable, {
     id: true,
     createdAt: true,
     updatedAt: true,
+    userId: true,
   })
   .required({
     title: true,
