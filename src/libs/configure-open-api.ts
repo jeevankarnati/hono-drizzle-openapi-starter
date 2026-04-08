@@ -5,7 +5,7 @@ import packageJSON from "../../package.json";
 
 export default function configureOpenAPI(app: AppOpenAPI) {
   app.doc("/doc", {
-    openapi: "3.0.0",
+    openapi: "3.1.1",
     info: {
       title: "Hono API",
       version: packageJSON.version,
@@ -22,6 +22,16 @@ export default function configureOpenAPI(app: AppOpenAPI) {
       pageTitle: "Hono API",
       mcp: { disabled: true },
       agent: { disabled: true },
+      sources: [
+        {
+          url: "/doc",
+          title: "API",
+        },
+        {
+          url: "/api/auth/open-api/generate-schema",
+          title: "Auth",
+        },
+      ],
     })
   );
 }

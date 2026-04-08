@@ -1,5 +1,7 @@
 # hono-drizzle-openapi
 
+<h2 align="center"><mark>Work in progress</mark></h2>
+
 A small REST API built with [Hono](https://hono.dev/), [Drizzle ORM](https://orm.drizzle.team/) (PostgreSQL), and [OpenAPI](https://www.openapis.org/) schemas via [`@hono/zod-openapi`](https://github.com/honojs/middleware/tree/main/packages/zod-openapi). Interactive docs are served with [Scalar](https://scalar.com/).
 
 ## Prerequisites
