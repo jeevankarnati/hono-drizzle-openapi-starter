@@ -17,7 +17,7 @@ export const getAll = createProtectedRoute({
   responses: {
     [HTTP_STATUS_CODES.OK]: jsonContent({
       schema: z.array(selectTodoSchema),
-      description: "This is the list of todos",
+      description: "This is the list of todos for current user",
     }),
   },
 });
@@ -29,14 +29,14 @@ export const create = createProtectedRoute({
   request: {
     body: jsonContent({
       schema: insertTodoSchema,
-      description: "Todo to create",
+      description: "Todo to create for current user",
       required: true,
     }),
   },
   responses: {
     [HTTP_STATUS_CODES.CREATED]: jsonContent({
       schema: selectTodoSchema,
-      description: "Created Todo",
+      description: "Created Todo for current user",
     }),
     [HTTP_STATUS_CODES.UNPROCESSABLE_ENTITY]: jsonContent({
       schema: createErrorSchema(insertTodoSchema),
@@ -55,7 +55,7 @@ export const getOne = createProtectedRoute({
   responses: {
     [HTTP_STATUS_CODES.OK]: jsonContent({
       schema: selectTodoSchema,
-      description: "Requested Todo",
+      description: "Requested Todo for current user",
     }),
     [HTTP_STATUS_CODES.NOT_FOUND]: jsonContent({
       schema: notFoundSchema,
@@ -83,7 +83,7 @@ export const update = createProtectedRoute({
   responses: {
     [HTTP_STATUS_CODES.OK]: jsonContent({
       schema: selectTodoSchema,
-      description: "Updated Todo",
+      description: "Updated Todo for current user",
     }),
     [HTTP_STATUS_CODES.NOT_FOUND]: jsonContent({
       schema: notFoundSchema,
@@ -105,7 +105,7 @@ export const deleteOne = createProtectedRoute({
   },
   responses: {
     [HTTP_STATUS_CODES.NO_CONTENT]: {
-      description: "Deleted Todo",
+      description: "Deleted Todo for current user",
     },
     [HTTP_STATUS_CODES.NOT_FOUND]: jsonContent({
       schema: notFoundSchema,
