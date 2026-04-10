@@ -17,11 +17,6 @@ export default defineConfig({
       "unknown",
     ],
   },
-  sortTailwindcss: {
-    stylesheet: "./src/index.css",
-    functions: ["clsx", "cn"],
-    preserveWhitespace: false,
-  },
   sortPackageJson: { sortScripts: true },
   ignorePatterns: ["src/db/migrations/**"],
 });
